@@ -37,8 +37,8 @@ Python 설치 없이 바로 실행하고 싶다면 소스코드를 받을 필요
 
 ```powershell
 # 1. 저장소 클론
-git clone https://github.com/<사용자명>/<저장소명>.git
-cd <저장소명>
+git clone https://github.com/dunkul/pdftopng.git
+cd pdftopng
 
 # 2. 가상환경 생성 및 활성화
 python -m venv venv
