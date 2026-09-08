@@ -10,6 +10,10 @@ PDF 파일의 각 페이지를 개별 PNG 이미지로 저장하는 도구입니
 
 Python 설치 없이 바로 실행하고 싶다면 소스코드를 받을 필요 없이 [Releases](../../releases) 페이지에서 `PdfToPng.exe`를 내려받아 실행하면 됩니다.
 
+- **Windows 10/11 64비트**에서만 동작합니다.
+- 코드 서명이 되어 있지 않아 실행 시 **Windows Defender SmartScreen** 경고("알 수 없는 게시자")가 뜰 수 있습니다. "추가 정보 → 실행"을 클릭하면 실행됩니다.
+- 백신 프로그램에 따라 드물게 오탐(false positive)이 발생할 수 있습니다. 문제가 있으면 예외 등록이 필요할 수 있습니다.
+
 ## 기능
 
 - PDF의 모든 페이지를 페이지별 PNG로 저장
@@ -79,9 +83,9 @@ venv\Scripts\python pdf_to_png.py 문서.pdf -d 150 -g --optimize -o 결과폴�
 
 ---
 
-## 2. exe 파일로 빌드하기
+## 2. (선택) 소스에서 exe 직접 빌드하기
 
-Python이 없는 컴퓨터에서도 실행할 수 있는 단일 실행 파일(exe)을 만들 수 있습니다.
+Releases의 exe 대신 직접 빌드하고 싶다면:
 
 ```powershell
 # 가상환경 활성화 상태에서
@@ -90,28 +94,7 @@ pip install pyinstaller
 pyinstaller --onefile --windowed --name PdfToPng gui.py
 ```
 
-- 결과물: `dist\PdfToPng.exe`
-- `--onefile`: 실행 파일 하나로 묶음
-- `--windowed`: 콘솔창 없이 GUI만 표시
-
-코드를 수정한 뒤에는 위 `pyinstaller` 명령을 다시 실행해야 exe에 반영됩니다. `build\`, `PdfToPng.spec`은 빌드 중간 산출물이며 삭제해도 다음 빌드 시 자동 재생성됩니다.
-
-### GitHub에서 자동 빌드/배포하기
-
-`v`로 시작하는 태그를 push하면 GitHub Actions(`.github/workflows/release.yml`)가 자동으로 exe를 빌드해 [Releases](../../releases)에 올려줍니다.
-
-```powershell
-git tag v1.0.0
-git push origin v1.0.0
-```
-
-### 빌드된 exe를 다른 컴퓨터에서 실행하기
-
-- Python 설치 **불필요** — 필요한 라이브러리가 모두 exe 안에 포함되어 있습니다.
-- **Windows 10/11 64비트**에서만 동작합니다 (32비트 PC나 Windows 외 OS에서는 실행 불가).
-- 코드 서명이 되어 있지 않아 **Windows Defender SmartScreen** 경고("알 수 없는 게시자")가 뜰 수 있습니다. "추가 정보 → 실행"을 클릭하면 실행됩니다.
-- 백신 프로그램에 따라 PyInstaller로 만든 exe가 드물게 오탐(false positive)될 수 있습니다. 문제가 있으면 예외 등록이 필요할 수 있습니다.
-- 정식 배포가 필요하다면 코드 서명 인증서(Sectigo, DigiCert 등)를 구매해 `signtool`로 서명하는 것을 권장합니다.
+결과물은 `dist\PdfToPng.exe`에 생성됩니다.
 
 ---
 
